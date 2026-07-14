@@ -28,7 +28,10 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="bg-[#050505] py-36">
+    <section
+      id="faq"
+      className="bg-[#050505] py-36"
+    >
       <div className="mx-auto max-w-5xl px-6">
 
         <div className="mb-20 text-center">
@@ -50,7 +53,6 @@ export default function FAQ() {
         <div className="space-y-6">
 
           {faqs.map((faq) => (
-
             <div
               key={faq.question}
               className="rounded-[28px] border border-white/10 bg-[#0B0B0B] p-8 transition-all duration-300 hover:border-white/20"
@@ -65,7 +67,6 @@ export default function FAQ() {
               </p>
 
             </div>
-
           ))}
 
         </div>

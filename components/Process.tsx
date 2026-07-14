@@ -27,10 +27,14 @@ export default function Process() {
   ];
 
   return (
-    <section className="relative bg-black py-36">
+    <section
+      id="process"
+      className="relative bg-black py-36"
+    >
       <div className="mx-auto max-w-7xl px-6">
 
         <div className="mb-20 text-center">
+
           <span className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs uppercase tracking-[0.4em] text-gray-400 backdrop-blur-xl">
             Process
           </span>
@@ -40,15 +44,15 @@ export default function Process() {
           </h2>
 
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400">
-            Every project follows a premium production pipeline from
-            strategy to final delivery.
+            Every project follows a premium production pipeline from strategy
+            to final delivery.
           </p>
+
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
 
           {steps.map((step) => (
-
             <div
               key={step.number}
               className="group rounded-[32px] border border-white/10 bg-[#0B0B0B] p-8 transition-all duration-500 hover:-translate-y-2 hover:border-white/20"
@@ -67,7 +71,6 @@ export default function Process() {
               </p>
 
             </div>
-
           ))}
 
         </div>
