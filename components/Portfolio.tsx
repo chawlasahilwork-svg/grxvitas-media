@@ -12,32 +12,18 @@ export default function Portfolio() {
       src: "/portfolio/audi.mp4",
     },
     {
-      title: "Luxury Watch",
-      category: "Product Film",
-      src: "/portfolio/watch.mp4",
-    },
-    {
-      title: "Luxury Perfume",
-      category: "Luxury Branding",
-      src: "/portfolio/perfume.mp4",
-    },
-    {
-      title: "Agency Showreel",
-      category: "Grxvitas.Media",
+      title: "Grxvitas.Media Showreel",
+      category: "Agency Reel",
       src: "/portfolio/agency.mp4",
     },
   ];
 
   return (
     <>
-      <section
-        id="portfolio"
-        className="bg-black py-32"
-      >
+      <section id="portfolio" className="bg-black py-32">
         <div className="mx-auto max-w-7xl px-6">
 
           <div className="mb-20 text-center">
-
             <span className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs uppercase tracking-[0.35em] text-gray-400">
               Portfolio
             </span>
@@ -50,19 +36,16 @@ export default function Portfolio() {
               Premium AI commercials crafted with cinematic storytelling,
               luxury visuals and scroll-stopping creativity.
             </p>
-
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
-
-            {videos.map((item, index) => (
+            {videos.map((video) => (
               <VideoCard
-                key={index}
-                video={item}
-                onClick={() => setSelectedVideo(item.src)}
+                key={video.title}
+                video={video}
+                onClick={() => setSelectedVideo(video.src)}
               />
             ))}
-
           </div>
 
         </div>
@@ -71,17 +54,15 @@ export default function Portfolio() {
       {selectedVideo && (
         <div
           onClick={() => setSelectedVideo(null)}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-6 backdrop-blur-xl"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-6 backdrop-blur-xl"
         >
-
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-6xl"
+            className="relative flex w-full max-w-5xl items-center justify-center"
           >
-
             <button
               onClick={() => setSelectedVideo(null)}
-              className="absolute -top-16 right-0 text-5xl text-white transition hover:rotate-90"
+              className="absolute right-4 top-4 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-black/70 text-3xl text-white transition hover:bg-white hover:text-black"
             >
               ×
             </button>
@@ -90,11 +71,11 @@ export default function Portfolio() {
               src={selectedVideo}
               controls
               autoPlay
-              className="w-full rounded-3xl border border-white/10"
+              playsInline
+              onEnded={() => setSelectedVideo(null)}
+              className="max-h-[85vh] max-w-full rounded-3xl border border-white/10 object-contain"
             />
-
           </div>
-
         </div>
       )}
     </>
@@ -110,25 +91,28 @@ function VideoCard({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
-  const play = () => {
-    ref.current?.play();
+  const play = async () => {
+    if (!ref.current) return;
+
+    try {
+      ref.current.currentTime = 0;
+      await ref.current.play();
+    } catch {}
   };
 
   const pause = () => {
-    if (ref.current) {
-      ref.current.pause();
-      ref.current.currentTime = 0;
-    }
+    if (!ref.current) return;
+
+    ref.current.pause();
+    ref.current.currentTime = 0;
   };
 
-  return (
-    <div
+  return (    <div
       onMouseEnter={play}
       onMouseLeave={pause}
       onClick={onClick}
       className="group cursor-pointer overflow-hidden rounded-[32px] border border-white/10 bg-[#080808] transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:shadow-[0_0_60px_rgba(255,255,255,0.08)]"
     >
-
       <div className="relative aspect-video overflow-hidden">
 
         <video
@@ -137,7 +121,7 @@ function VideoCard({
           loop
           playsInline
           preload="metadata"
-          className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+          className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
         >
           <source src={video.src} type="video/mp4" />
         </video>
@@ -145,11 +129,9 @@ function VideoCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
         <div className="absolute inset-0 flex items-center justify-center">
-
           <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 text-3xl text-white backdrop-blur-xl transition duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-black">
             ▶
           </div>
-
         </div>
 
       </div>
@@ -165,8 +147,7 @@ function VideoCard({
         </h3>
 
         <p className="leading-8 text-gray-400">
-          Cinematic AI commercial designed to deliver luxury visuals,
-          premium storytelling and high-end brand perception.
+          Premium AI commercial crafted with cinematic visuals and luxury storytelling.
         </p>
 
         <div className="pt-2 text-sm font-semibold uppercase tracking-[0.25em] text-white">
