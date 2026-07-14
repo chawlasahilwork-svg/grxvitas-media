@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+
+  --card: #0b0b0b;
+  --border: rgba(255, 255, 255, 0.08);
+
+  --muted: #8f8f8f;
+
+  --accent: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+section {
+  position: relative;
+}
+
+/* Selection */
+
+::selection {
+  background: white;
+  color: black;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Links */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Images */
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Buttons */
+
+button {
+  cursor: pointer;
+  transition: 0.35s ease;
+}
+
+/* Inputs */
+
+input,
+textarea {
+  font: inherit;
+}
+
+/* Glass */
+
+.glass {
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+/* Premium Container */
+
+.container-premium {
+  width: min(1280px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+/* Glow */
+
+.glow {
+  position: absolute;
+  inset: auto;
+  width: 650px;
+  height: 650px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  filter: blur(180px);
+  pointer-events: none;
+}
+
+/* Cards */
+
+.card-hover {
+  transition:
+    transform .45s ease,
+    border-color .45s ease,
+    background .45s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255,255,255,.18);
+}
+
+/* Buttons */
+
+.btn-primary {
+  background: white;
+  color: black;
+  border-radius: 999px;
+  padding: 16px 34px;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(255,255,255,.22);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(18px);
+  border-radius: 999px;
+  padding: 16px 34px;
+}
+
+.btn-secondary:hover {
+  border-color: white;
+}
+
+/* Smooth */
+
+* {
+  transition-property:
+    color,
+    background-color,
+    border-color,
+    opacity;
+  transition-duration: .3s;
+}
+
+/* Responsive */
+
+@media (max-width:768px){
+
+.container-premium{
+width:min(100% - 28px);
+}
+
+body{
+font-size:15px;
+}
+
+}
