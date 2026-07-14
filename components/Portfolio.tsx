@@ -1,110 +1,180 @@
+"use client";
+
+import { useRef, useState } from "react";
+
 export default function Portfolio() {
-  const projects = [
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
+  const videos = [
     {
       title: "Audi R8 Commercial",
       category: "Automotive",
-      video: "/portfolio/audi.mp4",
+      src: "/portfolio/audi.mp4",
     },
     {
       title: "Luxury Watch",
       category: "Product Film",
-      video: "/portfolio/watch.mp4",
+      src: "/portfolio/watch.mp4",
     },
     {
       title: "Luxury Perfume",
-      category: "Brand Commercial",
-      video: "/portfolio/perfume.mp4",
+      category: "Luxury Branding",
+      src: "/portfolio/perfume.mp4",
     },
     {
-      title: "Grxvitas.Media Showreel",
-      category: "Agency Reel",
-      video: "/portfolio/agency.mp4",
+      title: "Agency Showreel",
+      category: "Grxvitas.Media",
+      src: "/portfolio/agency.mp4",
     },
   ];
 
   return (
-    <section
-      id="portfolio"
-      className="relative bg-[#050505] py-36"
-    >
-      <div className="mx-auto max-w-7xl px-6">
+    <>
+      <section
+        id="portfolio"
+        className="bg-black py-32"
+      >
+        <div className="mx-auto max-w-7xl px-6">
 
-        <div className="mb-20 text-center">
+          <div className="mb-20 text-center">
 
-          <span className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs uppercase tracking-[0.4em] text-gray-400 backdrop-blur-xl">
-            Portfolio
-          </span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs uppercase tracking-[0.35em] text-gray-400">
+              Portfolio
+            </span>
 
-          <h2 className="mt-8 text-5xl font-black text-white md:text-7xl">
-            Featured AI Projects
-          </h2>
+            <h2 className="mt-8 text-5xl font-black text-white md:text-7xl">
+              Selected Work
+            </h2>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400">
-            Every visual is designed to stop scrolling and make brands unforgettable.
-          </p>
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400">
+              Premium AI commercials crafted with cinematic storytelling,
+              luxury visuals and scroll-stopping creativity.
+            </p>
+
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+
+            {videos.map((item, index) => (
+              <VideoCard
+                key={index}
+                video={item}
+                onClick={() => setSelectedVideo(item.src)}
+              />
+            ))}
+
+          </div>
 
         </div>
+      </section>
 
-        <div className="grid gap-8 lg:grid-cols-2">
+      {selectedVideo && (
+        <div
+          onClick={() => setSelectedVideo(null)}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-6 backdrop-blur-xl"
+        >
 
-          {projects.map((project) => (
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-6xl"
+          >
 
-            <div
-              key={project.title}
-              className="group overflow-hidden rounded-[32px] border border-white/10 bg-[#0B0B0B] transition-all duration-500 hover:-translate-y-2 hover:border-white/30 hover:shadow-[0_0_40px_rgba(255,255,255,0.08)]"
+            <button
+              onClick={() => setSelectedVideo(null)}
+              className="absolute -top-16 right-0 text-5xl text-white transition hover:rotate-90"
             >
+              ×
+            </button>
 
-              <div className="relative h-72 overflow-hidden">
+            <video
+              src={selectedVideo}
+              controls
+              autoPlay
+              className="w-full rounded-3xl border border-white/10"
+            />
 
-                <video
-                  src={project.video}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
+          </div>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+        </div>
+      )}
+    </>
+  );
+}
 
-                <div className="absolute inset-0 flex items-center justify-center">
+function VideoCard({
+  video,
+  onClick,
+}: {
+  video: any;
+  onClick: () => void;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
 
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-black/40 text-3xl text-white backdrop-blur-xl transition-all duration-500 group-hover:scale-110">
-                    ▶
-                  </div>
+  const play = () => {
+    ref.current?.play();
+  };
 
-                </div>
+  const pause = () => {
+    if (ref.current) {
+      ref.current.pause();
+      ref.current.currentTime = 0;
+    }
+  };
 
-              </div>
+  return (
+    <div
+      onMouseEnter={play}
+      onMouseLeave={pause}
+      onClick={onClick}
+      className="group cursor-pointer overflow-hidden rounded-[32px] border border-white/10 bg-[#080808] transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:shadow-[0_0_60px_rgba(255,255,255,0.08)]"
+    >
 
-              <div className="space-y-5 p-8">
+      <div className="relative aspect-video overflow-hidden">
 
-                <span className="text-xs uppercase tracking-[0.35em] text-gray-500">
-                  {project.category}
-                </span>
+        <video
+          ref={ref}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+        >
+          <source src={video.src} type="video/mp4" />
+        </video>
 
-                <h3 className="text-3xl font-bold text-white">
-                  {project.title}
-                </h3>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
-                <p className="leading-8 text-gray-400">
-                  Cinematic AI production crafted for premium brands,
-                  luxury storytelling and high-converting advertisements.
-                </p>
+        <div className="absolute inset-0 flex items-center justify-center">
 
-                <button className="pt-3 text-sm font-semibold uppercase tracking-[0.25em] text-white transition-all duration-300 group-hover:translate-x-2">
-                  View Project →
-                </button>
-
-              </div>
-
-            </div>
-
-          ))}
+          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 text-3xl text-white backdrop-blur-xl transition duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-black">
+            ▶
+          </div>
 
         </div>
 
       </div>
-    </section>
+
+      <div className="space-y-4 p-8">
+
+        <p className="text-xs uppercase tracking-[0.35em] text-gray-500">
+          {video.category}
+        </p>
+
+        <h3 className="text-3xl font-bold text-white">
+          {video.title}
+        </h3>
+
+        <p className="leading-8 text-gray-400">
+          Cinematic AI commercial designed to deliver luxury visuals,
+          premium storytelling and high-end brand perception.
+        </p>
+
+        <div className="pt-2 text-sm font-semibold uppercase tracking-[0.25em] text-white">
+          Watch Commercial →
+        </div>
+
+      </div>
+
+    </div>
   );
 }
