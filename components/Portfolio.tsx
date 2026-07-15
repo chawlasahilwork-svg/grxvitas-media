@@ -5,18 +5,33 @@ import { useRef, useState } from "react";
 export default function Portfolio() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
-  const videos = [
-    {
-      title: "Audi R8 Commercial",
-      category: "Automotive",
-      src: "/portfolio/audi.mp4",
-    },
-    {
-      title: "Grxvitas.Media Showreel",
-      category: "Agency Reel",
-      src: "/portfolio/agency.mp4",
-    },
-  ];
+ const videos = [
+  {
+    title: "Audi R8 Commercial",
+    category: "Automotive",
+    src: "/portfolio/audi.mp4",
+  },
+  {
+    title: "Luxury Bike Commercial",
+    category: "Automotive",
+    src: "/portfolio/bike.mp4",
+  },
+  {
+    title: "Luxury Watch Commercial",
+    category: "Luxury Product",
+    src: "/portfolio/watch.mp4",
+  },
+  {
+    title: "Luxury Perfume Commercial",
+    category: "Luxury Branding",
+    src: "/portfolio/perfume.mp4",
+  },
+  {
+    title: "Grxvitas.Media Showreel",
+    category: "Agency Reel",
+    src: "/portfolio/agency.mp4",
+  },
+];
 
   return (
     <>
@@ -38,7 +53,7 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {videos.map((video) => (
               <VideoCard
                 key={video.title}
