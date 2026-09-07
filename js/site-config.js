@@ -24,6 +24,15 @@ const SITE_CONFIG = {
 
 
 /* ------------------------------------------------------------
+   VIDEO BASE URL
+   ------------------------------------------------------------ 
+   Videos are hosted via GitHub LFS. This base URL points to
+   the raw media files on GitHub.
+   ------------------------------------------------------------ */
+const VIDEO_BASE = 'https://media.githubusercontent.com/media/chawlasahilwork-svg/grxvitas-media/main/assets/portfolio';
+
+
+/* ------------------------------------------------------------
    PORTFOLIO ITEMS
    ------------------------------------------------------------ 
    Each item represents one project in the portfolio grid.
@@ -33,14 +42,15 @@ const SITE_CONFIG = {
      title       — Project title (shown on hover)
      description — Short tagline (shown on hover)
      category    — One of: AI COMMERCIAL | PRODUCT AD | SOCIAL MEDIA | BRAND FILM
-     videoUrl    — Path or URL to the MP4 file (leave '' for placeholder)
+     videoUrl    — Full URL or relative path to the MP4 file
      posterUrl   — Path or URL to a thumbnail/poster image (leave '' for placeholder)
      size        — Grid size: 'large' | 'medium' | 'small'
 
    HOW TO ADD A NEW VIDEO:
-   1. Place your .mp4 and poster .jpg/.png in the /assets/portfolio/ folder.
+   1. Upload your video to the assets/portfolio/ folder in your GitHub repo.
    2. Copy one of the objects below and update the fields.
-   3. Save this file — the website updates automatically.
+   3. Use VIDEO_BASE + '/filename.mp4' for the videoUrl.
+   4. Save this file — the website updates automatically.
    ------------------------------------------------------------ */
 const PORTFOLIO_DATA = [
   {
@@ -48,7 +58,7 @@ const PORTFOLIO_DATA = [
     title: 'Audi — Redefine the Drive',
     description: 'AI-crafted cinematic commercial for automotive luxury.',
     category: 'AI COMMERCIAL',
-    videoUrl: 'assets/portfolio/audi.mp4.MP4',
+    videoUrl: VIDEO_BASE + '/audi.mp4.MP4',
     posterUrl: '',
     size: 'large',
   },
@@ -57,7 +67,7 @@ const PORTFOLIO_DATA = [
     title: 'Noir Essence — Perfume',
     description: 'Sensory-driven product film for premium fragrance.',
     category: 'PRODUCT AD',
-    videoUrl: 'assets/portfolio/Perfume.mp4.MP4',
+    videoUrl: VIDEO_BASE + '/Perfume.mp4.MP4',
     posterUrl: '',
     size: 'medium',
   },
@@ -66,7 +76,7 @@ const PORTFOLIO_DATA = [
     title: 'Timepiece — Precision',
     description: 'Detail-obsessed visual for luxury watchmaking.',
     category: 'PRODUCT AD',
-    videoUrl: 'assets/portfolio/Watch.mp4.MP4',
+    videoUrl: VIDEO_BASE + '/Watch.mp4.MP4',
     posterUrl: '',
     size: 'medium',
   },
@@ -75,7 +85,7 @@ const PORTFOLIO_DATA = [
     title: 'Starbucks — Morning Ritual',
     description: 'AI-generated brand film for global coffee culture.',
     category: 'AI COMMERCIAL',
-    videoUrl: 'assets/portfolio/Starbucks.mp4.MP4',
+    videoUrl: VIDEO_BASE + '/Starbucks.mp4.MP4',
     posterUrl: '',
     size: 'large',
   },
@@ -84,7 +94,7 @@ const PORTFOLIO_DATA = [
     title: 'Jewellery — Radiance',
     description: 'High-end product visuals that capture light and desire.',
     category: 'PRODUCT AD',
-    videoUrl: 'assets/portfolio/Jewellery.mp4.MP4',
+    videoUrl: VIDEO_BASE + '/Jewellery.mp4.MP4',
     posterUrl: '',
     size: 'small',
   },
@@ -93,7 +103,7 @@ const PORTFOLIO_DATA = [
     title: 'Flow — Architectural Detail',
     description: 'Minimalist product design brought to life.',
     category: 'PRODUCT AD',
-    videoUrl: 'assets/portfolio/Faucet.mp4.MP4',
+    videoUrl: VIDEO_BASE + '/Faucet.mp4.MP4',
     posterUrl: '',
     size: 'small',
   },
@@ -102,7 +112,7 @@ const PORTFOLIO_DATA = [
     title: 'GRXVITAS — The Studio',
     description: 'A look inside the creative engine.',
     category: 'BRAND FILM',
-    videoUrl: 'assets/portfolio/Us.mp4.MOV',
+    videoUrl: VIDEO_BASE + '/Us.mp4.MOV',
     posterUrl: '',
     size: 'large',
   },
